@@ -23,6 +23,6 @@ CREATE TABLE bookings (
     checkOutDate DATETIME NOT NULL,
     customerName VARCHAR(255),
     
-    PRIMARY KEY (roomNo, bookingDate)
+    PRIMARY KEY (roomNo, bookingDate),
     FOREIGN KEY (roomNo) REFERENCES rooms (roomNo)
 );
