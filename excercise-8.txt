@@ -1,0 +1,41 @@
+mysql> describe Account;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| email      | varchar(255) | NO   |     | NULL    |                |
+| password   | varchar(40)  | NO   |     | NULL    |                |
+| createdOn  | datetime     | NO   |     | NULL    |                |
+| modifiedOn | datetime     | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> describe AddressBook;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment |
+| accountId  | int(11)      | NO   | MUL | NULL    |                |
+| name       | varchar(255) | NO   |     | NULL    |                |
+| createdOn  | datetime     | NO   |     | NULL    |                |
+| modifiedOn | datetime     | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> describe Entry;
++------------------+---------------------------------+------+-----+---------+----------------+
+| Field            | Type                            | Null | Key | Default | Extra          |
++------------------+---------------------------------+------+-----+---------+----------------+
+| id               | int(11)                         | NO   | PRI | NULL    | auto_increment |
+| addressBookId    | int(11)                         | NO   | MUL | NULL    |                |
+| firstName        | varchar(255)                    | NO   |     | NULL    |                |
+| lastName         | varchar(255)                    | YES  |     | NULL    |                |
+| type             | enum('home','work','other')     | YES  |     | NULL    |                |
+| subtype          | enum('phone','address','email') | YES  |     | NULL    |                |
+| contentLineOne   | varchar(255)                    | NO   |     | NULL    |                |
+| contentLineTwo   | varchar(255)                    | YES  |     | NULL    |                |
+| contentLineThree | varchar(255)                    | YES  |     | NULL    |                |
+| contentLineFour  | varchar(255)                    | YES  |     | NULL    |                |
+| contentlineFive  | varchar(255)                    | YES  |     | NULL    |                |
++------------------+---------------------------------+------+-----+---------+----------------+
+11 rows in set (0.01 sec)
