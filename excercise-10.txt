@@ -1,0 +1,76 @@
+mysql> CREATE TABLE floors (
+    ->     floorNo INT AUTO_INCREMENT,
+    ->     windows INT,
+    ->     
+    ->     PRIMARY KEY (floorNo)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> CREATE TABLE rooms (
+    ->     roomNo INT AUTO_INCREMENT,
+    ->     floorNo INT NOT NULL,
+    ->     roomCapacity INT NOT NULL,
+    ->     isRentable BOOLEAN NOT NUll,
+    ->     hasCarpet BOOLEAN NOT NUll,
+    ->     roomType ENUM ('rentable', 'kitchen', 'janitor', 'gym', 'restaurant', 'bathroom', 'other') NOT NUll,
+    ->     
+    ->     PRIMARY KEY (roomNo),
+    ->     FOREIGN KEY (floorNo) REFERENCES floors (floorNo)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> CREATE TABLE bookings (
+    ->     roomNo INT NOT NUll,
+    ->     bookingDate DATETIME NOT NUll,
+    ->     checkOutDate DATETIME NOT NULL,
+    ->     customerName VARCHAR(255),
+    ->     
+    ->     PRIMARY KEY (roomNo, bookingDate),
+    ->     FOREIGN KEY (roomNo) REFERENCES rooms (roomNo)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_Hotel |
++-----------------+
+| bookings        |
+| floors          |
+| rooms           |
++-----------------+
+3 rows in set (0.00 sec)
+
+mysql> describe floors;
++---------+---------+------+-----+---------+----------------+
+| Field   | Type    | Null | Key | Default | Extra          |
++---------+---------+------+-----+---------+----------------+
+| floorNo | int(11) | NO   | PRI | NULL    | auto_increment |
+| windows | int(11) | YES  |     | NULL    |                |
++---------+---------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> describe rooms;
++--------------+----------------------------------------------------------------------------+------+-----+---------+----------------+
+| Field        | Type                                                                       | Null | Key | Default | Extra          |
++--------------+----------------------------------------------------------------------------+------+-----+---------+----------------+
+| roomNo       | int(11)                                                                    | NO   | PRI | NULL    | auto_increment |
+| floorNo      | int(11)                                                                    | NO   | MUL | NULL    |                |
+| roomCapacity | int(11)                                                                    | NO   |     | NULL    |                |
+| isRentable   | tinyint(1)                                                                 | NO   |     | NULL    |                |
+| hasCarpet    | tinyint(1)                                                                 | NO   |     | NULL    |                |
+| roomType     | enum('rentable','kitchen','janitor','gym','restaurant','bathroom','other') | NO   |     | NULL    |                |
++--------------+----------------------------------------------------------------------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> describe bookings;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| roomNo       | int(11)      | NO   | PRI | NULL    |       |
+| bookingDate  | datetime     | NO   | PRI | NULL    |       |
+| checkOutDate | datetime     | NO   |     | NULL    |       |
+| customerName | varchar(255) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)

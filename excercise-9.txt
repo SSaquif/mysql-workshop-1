@@ -1,0 +1,40 @@
+mysql> CREATE TABLE chickenCoop (
+    ->     chickenId INT AUTO_INCREMENT,
+    ->     chickenType ENUM ('rooster', 'hen', 'chicks') NOT NULL,
+    ->     birthDate DATETIME NOT NULL,
+    ->     
+    ->     PRIMARY KEY (chickenId)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> describe chickenCoop;
++-------------+--------------------------------+------+-----+---------+----------------+
+| Field       | Type                           | Null | Key | Default | Extra          |
++-------------+--------------------------------+------+-----+---------+----------------+
+| chickenId   | int(11)                        | NO   | PRI | NULL    | auto_increment |
+| chickenType | enum('rooster','hen','chicks') | NO   |     | NULL    |                |
+| birthDate   | datetime                       | NO   |     | NULL    |                |
++-------------+--------------------------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE chickenCoop 
+    -> 
+Display all 746 possibilities? (y or n)
+    -> ;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ALTER TABLE chickenCoop
+    -> Add deathDate datetime;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe chickenCoop;
++-------------+--------------------------------+------+-----+---------+----------------+
+| Field       | Type                           | Null | Key | Default | Extra          |
++-------------+--------------------------------+------+-----+---------+----------------+
+| chickenId   | int(11)                        | NO   | PRI | NULL    | auto_increment |
+| chickenType | enum('rooster','hen','chicks') | NO   |     | NULL    |                |
+| birthDate   | datetime                       | NO   |     | NULL    |                |
+| deathDate   | datetime                       | YES  |     | NULL    |                |
++-------------+--------------------------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
